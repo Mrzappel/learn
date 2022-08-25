@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let data = {
+            name: '刘德华',
+            age: 18,
+            sex: 'male'
+        }
+        Object.keys(data).forEach((key) => {
+            console.log(key,data[key])
+            defineReactive(data,key,data[key])
+        })      
+        function defineReactive(data,key,value) {
+            Object.defineProperty(data,key,{
+                get(){
+                    console.log('访问了属性',key)
+                    return value
+                },
+                set(newValue){
+                    console.log('修改了属性',key)
+                    value = newValue
+                }
+            })
+        }
+        
+    </script>
+    <script>
+        let person = {
+            name:'zhuchenchen',
+            age:18            
+        }
+        Object.defineProperty(person,'age',{
+            get(){
+                console.log('这里是get')
+                return 19
+            },
+            set(){
+                person.age = 88
+            }
+        })
+    </script>
+</body>
+
+</html>

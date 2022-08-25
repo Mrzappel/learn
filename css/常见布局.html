@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left"></div>
+      <div class="center"></div>
+      <div class="right"></div>
+    </div>
+    <style>
+
+      /* 左右固定，中间自适应 */
+
+      /* .container {
+        display: flex;
+      }
+      .center {
+        flex: 1;
+        background-color: green;
+      }
+      .left,
+      .right {
+        flex: 0 0 200px;
+        height: 100px;
+        background-color: blue;
+      }   */
+
+      /* 上下固定，中间自适应 */
+      
+      .container {
+        display: flex;
+        flex-direction: column;
+      }
+      .center {
+        flex:1;
+        height: 100px;
+        background-color: red;
+      }
+      .left,.right{
+        flex:  0 0 100px;
+        background-color: blue;
+      }
+    </style>
+  </body>
+</html>

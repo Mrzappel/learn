@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <p v-text="name" class="ooo">朱琛琛</p>
+      <p v-text="age"></p>
+      <p v-text="sex"></p>
+      <input type="text" v-model="tt" />
+    </div>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <script>
+      let data = {
+        name: "刘德华",
+        age: 18,
+        sex: "male",
+        tt: "",
+      };
+      Object.keys(data).forEach((key) => {
+        // console.log(key, data[key]);
+        defineReactive(data, key, data[key]);
+      });
+      function defineReactive(data, key, value) {
+        Object.defineProperty(data, key, {
+          get() {
+            // console.log("访问了属性", key);
+            return value;
+          },
+          set(newValue) {
+            if (newValue === value) {
+              return;
+            }
+            // console.log("修改了属性", key);
+            value = newValue;
+            complie();
+            // document.querySelector("p").innerText = value;
+          },
+        });
+      }
+      function complie() {
+        const childNodes = document.querySelector("#app").childNodes;
+        // console.log(childNodes);
+        childNodes.forEach((node) => {
+          if (node.nodeType === 1) {
+            // console.log(node);
+            const attrs = node.attributes;
+            Array.from(attrs).forEach((attr) => {
+              // console.log(attr);
+              const { nodeName, nodeValue } = attr;
+              // console.log(nodeName, nodeValue);
+              //v-text
+              if (nodeName === "v-text") {
+                //改动其中一个属性时，其余属性也被调用
+                console.log("我在改属性", node);
+                node.innerText = data[nodeValue];
+              }
+              //v-model
+              if (nodeName === "v-model") {
+                node.value = data[nodeValue];
+                node.addEventListener("input", (e) => {
+                  console.log("我在改属性", node.value);
+                  data[nodeValue] = e.target.value;
+                });
+              }
+            });
+          }
+        });
+      }
+      complie();
+    </script>
+  </body>
+</html>

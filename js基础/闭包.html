@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+<body>
+  <script>
+    function outer(){
+      let num = 10
+    return function inner (){
+        console.log('22')
+        return num++
+        
+      }
+    }
+    console.log('11')
+    outer()
+  </script>
+</body>
+</html>

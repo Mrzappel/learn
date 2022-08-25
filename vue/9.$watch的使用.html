@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        这里是{{name}}
+    </div>
+
+</body>
+<script crossorigin="anonymous"
+    integrity="sha512-qRXBGtdrMm3Vdv+YXYud0bixlSfZuGz+FmD+vfXuezWYfw4m5Ov0O4liA6UAlKw2rh9MOYULxbhSFrQCsF1hgg=="
+    src="https://lib.baomitu.com/vue/2.6.14/vue.common.dev.js"></script>
+<script>
+
+    const a =new Vue({
+
+        data() {
+            return {
+                name: 'vue'
+            }
+        },
+        render: h => h('#app')
+    }).mount('#app')
+    e
+</script>
+
+</html>

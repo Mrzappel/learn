@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // setTimeout(() =>{
+    //   console.log(1)
+    // },20),
+    // console.log(5)
+    // setTimeout(()=>{
+    //   console.log(2)
+    // },10)
+    // console.log(6)
+    // console.time('aa')
+    // for(i=0;i<90000000;i++){
+    //   //do something
+    //   //大约168.1328125ms
+    // }
+    // console.timeEnd('aa')
+    // console.log(7)
+    // setTimeout(()=>{
+    // console.log(3)
+    // },20)
+    // console.log(8)
+    // setTimeout(()=>{
+    //   console.log(4)
+    // },10)
+    //输出结果5，6，7，8，2，1，4，3 
+    
+    async function async1(){
+      console.log('async1 start')
+      await async2()
+      console.log('async end');
+    }
+    async function async2(){
+      console.log('async2');
+
+    }
+    console.log('script start')
+    setTimeout(()=>{
+      console.log('setTimeout');
+    },0)
+    async1()
+    new Promise(function (resolve){
+      console.log('promise1');
+      resolve()
+    }).then(function(){
+      console.log('promise2');
+    })
+    console.log('script end');
+    </script>
+script start - async1 start -async2-promise1-script end -async end -promise2-setTimeout
+</body>
+</html>

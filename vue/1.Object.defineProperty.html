@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //1.字面量定义
+        // let data = {
+        //     name: '刘德华'
+        // }
+        let data = {}
+        //2.defineProperty定义
+        Object.defineProperty(data, 'name', {
+            get() {
+                console.log('我知道你在读取name')
+                return 'getName1111'
+            },  
+            set(newValue) {
+                console.log('name被你改了', newValue)
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">很大</button>
+    <script>
+      const btn = document.getElementById("btn");
+      // btn.onclick = function () {
+      //   console.log("我被点了");
+      // };
+      // btn.onclick = function () {
+      //   console.log("我又被点了");
+      // };
+      btn.addEventListener("click", () => {
+        console.log("我被点了");
+      });
+      btn.addEventListener("click", () => {
+        console.log("我又被点了");
+      });
+      //可以实现一对多，其实使用的就是发布订阅
+      //事件收集
+      const map = {};
+      function collect(eventName, fn) {
+        if (!map[eventName]) {
+          map[eventName] = [];
+        }
+        map[eventName].push(fn);
+      }
+      collect("cc", () => {
+        console.log("第一次事件收集");
+      });
+      collect("cc", () => {
+        console.log("第二次事件收集");
+      });
+      console.log(map);
+      //以上完成了事件的收集操作，实现了一对多存储
+
+      //模拟鼠标点击，主动通过程序去
+      function trigger(eventName) {
+        map[eventName].forEach((fn) => fn());
+      }
+      trigger("cc");
+
+      //优化，把相关的事件和数据解构都收敛到一个对象中
+      const Dep = {
+        map: {},
+        collect(eventName, fn) {
+          //如果当前map中已经初始化了就直接push，否则先初始化再添加
+          if (!this.map[eventName]) {
+            this.map[eventName] = [];
+          }
+          this.map[eventName].push(fn);
+        },
+        trigger(eventName) {
+          this.map[eventName].forEach((fn) => fn()); 
+        },
+      };
+
+      Dep.collect("hh", () => {
+        console.log("111");
+      });
+      Dep.collect("zz", () => {
+        console.log("222");
+      });
+      console.log(Dep.map);
+      Dep.trigger("hh");
+    </script>
+  </body>
+</html>
