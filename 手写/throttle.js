@@ -1,14 +1,6 @@
-// function throttle(fn, delay) {
-//   let last
-//   let now = new Date()
-//   return function (...args) {
-//     if (now - last > delay) {
-//       fn.call(this, ...args)
-//       last = now
-//     }
-//   }
-// }
-//ceshi 
+
+
+//https://juejin.cn/post/7069805387490263047#heading-3
 /**
  * 
  * @param {*} promise.all
@@ -39,3 +31,24 @@ function PromiseRace(promises) {
     }
   })
 }
+
+
+
+
+
+
+
+
+
+
+
+// function throttle(fn, delay) {
+//   let last
+//   let now = new Date()
+//   return function (...args) {
+//     if (now - last > delay) {
+//       fn.call(this, ...args)
+//       last = now
+//     }
+//   }
+// }
