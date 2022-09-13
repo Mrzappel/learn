@@ -1,3 +1,4 @@
+import { PromiseAll001 } from "./promiseAll.mjs"
 const p1 = Promise.resolve('p1')
 //const p1 = Promise.reject('p1)
 const p2 = new Promise((resolve, reject) => {
@@ -21,11 +22,18 @@ const p3 = new Promise((resolve, reject) => {
 // })
 
 // 所有Promise实例都成功
-Promise.all([p1, p2, p3])
-  .then(res => {
-    console.log(res)
-  })
-  .catch(err => console.log(err)) // 2秒后打印 [ 'p1', 'p2 延时一秒', 'p3 延时两秒' ]
+// Promise.all([p1, p2, p3])
+//   .then(res => {
+//     console.log(res)
+//   })
+//   .catch(err => console.log(err)) // 2秒后打印 [ 'p1', 'p2 延时一秒', 'p3 延时两秒' ]
+
+//打印自己的promise
+PromiseAll001([p1, p2, p3]).then((res) => {
+  console.log(res);
+}).catch((err => {
+  console.log(err);
+}))
 
 // 一个Promise实例失败
 // Promise.all([p1, p2, p4])
