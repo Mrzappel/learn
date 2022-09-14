@@ -1,4 +1,4 @@
-import { PromiseAll001 } from "./promiseAll.mjs"
+import { PromiseAll001,PromiseAllSec} from "./promiseAll.mjs"
 const p1 = Promise.resolve('p1')
 //const p1 = Promise.reject('p1)
 const p2 = new Promise((resolve, reject) => {
@@ -9,8 +9,8 @@ const p2 = new Promise((resolve, reject) => {
 
 const p3 = new Promise((resolve, reject) => {
   setTimeout(() => {
-    resolve('p3 延时两秒')
-  }, 2000)
+    resolve('p3 延时4秒')
+  }, 4000)
 })
 
 // const p4 = Promise.reject('p4 rejected')
@@ -29,7 +29,7 @@ const p3 = new Promise((resolve, reject) => {
 //   .catch(err => console.log(err)) // 2秒后打印 [ 'p1', 'p2 延时一秒', 'p3 延时两秒' ]
 
 //打印自己的promise
-PromiseAll001([p1, p2, p3]).then((res) => {
+PromiseAllSec([p1, p2, p3]).then((res) => {
   console.log(res);
 }).catch((err => {
   console.log(err);

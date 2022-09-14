@@ -62,7 +62,24 @@ function PromiseRace (promises) {
   })
 }
 
-
+function PromiseAllSec (promises) {
+  return new Promise((resolve, reject) => {
+    if (!Array.isArray(promises)) {
+      return reject(new Error('the vairabel should be Array'))
+    }
+    let arr = new Array(promises.length)
+    let count = 0  
+    promises.forEach((promise,id) => {
+      Promise.resolve(promise).then(res => {
+        arr[id] = res
+        count++
+        if (count === arr.length) {
+          resolve(arr)
+        }
+      },reject)
+    })
+  })
+}
 
 // const PromiseAll001 = function (promises) {
 //   let arr = [],
@@ -79,7 +96,8 @@ function PromiseRace (promises) {
 // }
 
 export {
-  PromiseAll001
+  PromiseAll001,
+  PromiseAllSec
 }
 
 
