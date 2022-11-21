@@ -1,14 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-    <script src="../js基础/新增数据类型.js">
+<html>
+  <body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <!-- Babel Script -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/jsx">
+      const app = document.getElementById('app')
+
+      function Footer () {
+        return (<h1>fffff</h1>)
+      }
+      function HomePage () {
+        return (
+            <div> 199<Footer /></div>
+        )
+      }
+      ReactDOM.render(<HomePage   />, app)
+      //    ReactDOM.render(<h1>this is react render content</h1>, app)
+      //  Create a new H1 element
+      // const header = document.createElement('h1')
+
+      // //   Create a new text node for the H1 element
+      // const headerContent = document.createTextNode(
+      //     'Develop. Preview. Ship. /rocket/'
+      // )
+
+      // header.appendChild(headerContent)
+
+      // app.appendChild(header)
     </script>
-</body>
+  </body>
 </html>
