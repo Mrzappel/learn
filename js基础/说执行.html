@@ -1,0 +1,23 @@
+
+<body>
+  <div id="box">
+    <a href="javascript:console.log(1)" id="anchor">Click</a>
+  </div>
+</body>
+<script>
+	var box = document.getElementById('box')
+  var anchor = document.getElementById('anchor')
+  
+  anchor.addEventListener('click', function() {
+    console.log(2)
+  })
+  
+  box.addEventListener('click', function() {
+    console.log(3)
+  }, true)
+  
+	box.addEventListener('click', function() {
+    console.log(4)
+  })
+</script>
+<!-- 3,2,4,1 -->
