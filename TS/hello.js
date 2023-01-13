@@ -1,9 +1,8 @@
-"use strict";
-let a = 1;
+var a = 1;
 console.log(a);
-let b = '1111';
+var b = '1111';
 console.log(b);
-let c = false;
+var c = false;
 console.log(c);
-let d = [1, 2, 3];
+var d = [1, 2, 3];
 console.log(d);
