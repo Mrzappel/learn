@@ -1,10 +1,13 @@
 // import logo from './logo.svg';
 // import './App.css';
 
-import Button from "./Button";
-import Content from "./Content";
-import Footer from "./Footer";
-import Header from "./Header";
+import Button from './Button'
+import Content from './Content'
+import Footer from './Footer'
+import Header from './Header'
+import useLocalStorage from './hooks/useLocalStorage'
+import useWindowScroll from './hooks/useWindowScroll'
+import Input from './Input'
 
 // function App() {
 //   return (
@@ -55,28 +58,37 @@ import Header from "./Header";
 // }
 
 const App = () => {
+  const [y] = useWindowScroll()
   const info = [
     {
       part: 'Fundamentals of React',
-      exercises: 10
+      exercises: 10,
     },
     {
       part: 'Using props to pass data',
-      exercises: 7
+      exercises: 7,
     },
     {
       part: 'State of a component',
-      exercises: 14
-    }
+      exercises: 14,
+    },
   ]
   const course = 'react learning'
+  const passData = val => {
+    console.log(val)
+  }
+  const [msg, setMsg] = useLocalStorage('name', 'liudehua')
   return (
-    <>
+    <div style={{ height: '10000px' }}>
       <Header course={course} />
-      <Content info={info}/>
+      <Content info={info} />
       <Footer info={info} />
-      <Button/>
-    </>
+      <Button passData={passData} />
+      <Input>
+        <div onClick={() => setMsg('wangyuyan')}>{msg}this is child hh</div>
+      </Input>
+      <p>{y}</p>
+    </div>
   )
 }
-export default App;
+export default App
