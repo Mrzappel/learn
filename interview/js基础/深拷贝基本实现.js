@@ -117,3 +117,15 @@ const bb = deepCopy(newArr)
 // console.log(aa, bb)
 newArr[1][1].age = 10
 console.log(newArr,bb)
+
+
+function deepClone (obj) {
+  if (typeof obj !== object || !typeof obj) return obj
+  
+  const newArr = Array.isArray(obj) ? {} : []
+  for (let k in obj) {
+    newArr[k] = deepClone(obj[k])
+  }
+  return newArr
+}
+
