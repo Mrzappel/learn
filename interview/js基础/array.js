@@ -11,3 +11,5 @@ function elCount(num,el) {
 }
 const testNum = [8,8,8,8,1,1,3,3]
 console.log(elCount(testNum,1))
+
+// 括号的有效性
