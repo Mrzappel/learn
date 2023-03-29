@@ -1,5 +1,6 @@
 {
 	"dependencies": {
-		"friendly-errors-webpack-plugin": "^1.7.0"
+		"friendly-errors-webpack-plugin": "^1.7.0",
+		"vue-cli": "^2.9.6"
 	}
 }
