@@ -1,4 +1,5 @@
 const { sum } = require('./sum')
+// import {sum} from './sum'
 describe('Math module', () => {
   test('shoule return sum result when one number plus another number', () => {
     const number = 1
