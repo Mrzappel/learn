@@ -11,20 +11,54 @@
     <b>33</b>
     <span>232</span>
  <script>
-   function currying(fn,...args){
-    if(fn.length <= args.length){
-        return fn(...args)
-    }
-    return function(...args1){
-        return currying(fn,...args,...args1)
-    }
+//    function currying(fn,...args){
+//     if(fn.length <= args.length){
+//         return fn(...args)
+//     }
+//     return function(...args1){
+//         return currying(fn,...args,...args1)
+//     }
+// }
+// function add(a,b,c){
+//     return a + b + c
+// }
+// add(1,2,3) // 6
+// var curryingAdd = currying(add);
+// curryingAdd(1)(2)(3) // 6
+
+// const myCurrying = (fn, ...args) => {
+//   if (args.length >= fn.length) {
+//     return fn(...args);
+//   } else {
+//     return (...args2) => myCurrying(fn, ...args, ...args2);
+//   }
+// }
+
+// const add = (x, y, z) => {
+//   return x + y + z
+// }
+
+// const addCurry = myCurrying(add)
+// const sum1 = addCurry(1, 2, 3)
+// const sum2 = addCurry(1)(2)(3)
+
+// console.log(sum1, 'sum1');
+// console.log(sum2, 'sum2');
+// console.log(2);
+// function curry () {
+//   let args = [].slice.call(arguments)
+//   let fn = args.shift()
+//   return function () {
+//     let newArgs = args.concat([].slice.call(arguments))
+//     return fn.apply(this, newArgs)
+//   }
+// }
+function add (a, b) {
+  console.log(arguments,'arguments')
+  console.log(Array.prototype.slice.call(arguments),'Array.prototype.slice.call(arguments)')
 }
-function add(a,b,c){
-    return a + b + c
-}
-add(1,2,3) // 6
-var curryingAdd = currying(add);
-curryingAdd(1)(2)(3) // 6
+add(1,2)
+add(2,3)
  </script>
 </body>
 </html>
