@@ -3,7 +3,7 @@
  * @param {string} version2
  * @return {number}
  */
-const compareVersion = function (version1, version2) {
+export const compareVersion = function (version1, version2) {
   let v1 = version1.split('.')
 
   let v2 = version2.split('.')
@@ -20,4 +20,3 @@ const compareVersion = function (version1, version2) {
   return 0
 }
 compareVersion('1.01', '1.001')
-export default compareVersion
