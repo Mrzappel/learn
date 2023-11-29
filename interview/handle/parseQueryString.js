@@ -70,9 +70,12 @@ const isValid = (str) => {
     '(':')'
   }
   for (let i = 0; i < str.length; i++) {
+    //当前是左括号
     if (map[str[i]]) {
+    // 左括号入栈
       stack.push(str[i])
     } else {
+      //当前是右括号 --- stack.pop弹出已经入栈的左括号,map找到对应的右括号
       if(str[i] !== map(stack.pop())) {
         return false
       }
