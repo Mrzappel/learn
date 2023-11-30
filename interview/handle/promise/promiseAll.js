@@ -3,7 +3,7 @@ const PromiseAll1 = promises => {
     const result = []
     let id = 0
     if (typeof promises[Symbol.iterator] !== 'function') {
-      return reject(new Error('params must have iterator'))
+      return reject(new Error('param is not iterable'))
     }
     Array.prototype.forEach.call(promises, (promise, index) => {
       Promise.resolve(promise)
@@ -46,3 +46,29 @@ let arrayLike = {
   length: 2,
 }
 PromiseAll.all(arrayLike).then(res => console.log(res))
+
+/**
+ * @time 2023/11/30 15:00
+ * @param {*} promises 
+ * @returns 
+ */
+function myPromiseAll(promises) {
+  return new Promise((resolve, reject) => {
+    if (typeof promises[Symbol.iterator] !== 'function') {
+      return reject(new Error('params is not iterable'))
+    }
+    let count = 0
+    let result = []
+    promises.forEach((item, index) => {
+      Promise.resolve(item)
+        .then(res => {
+          result[count] = res
+          count++
+          if (promises.length === count) {
+            resolve(result)
+          }
+        })
+        .catch(error => reject(error))
+    })
+  })
+}
