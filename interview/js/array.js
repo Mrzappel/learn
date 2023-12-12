@@ -1,7 +1,7 @@
 /**数组的reduce方法，
 * @params：callback,initevalue
 *
-**/!
+**/
 
 
 function elCount(num,el) {
