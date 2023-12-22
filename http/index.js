@@ -22,6 +22,14 @@ app.get('/negotiation-cache', function (req, res) {
     res.send('This is negotiation cache.')
   }
 })
+// server.js
+
+app.get('/say', function(req, res) {
+  let { wd, callback } = req.query
+  console.log(wd) // Iloveyou
+  console.log(callback) // show
+  res.end(`${callback}('我不爱你')`)
+})
 
 app.listen(3000, function () {
   console.log('Server is running at http://localhost:3000')

@@ -62,29 +62,50 @@ function deepcClone(obj, hash = new WeakMap()) {
 Array.prototype.duplicator = function () {
   return this.concat(this)
 }
-const isValid = (str) => {
+const isValid = str => {
   let stack = []
   const map = {
     '{': '}',
     '[': ']',
-    '(':')'
+    '(': ')',
   }
   for (let i = 0; i < str.length; i++) {
     //当前是左括号
     if (map[str[i]]) {
-    // 左括号入栈
+      // 左括号入栈
       stack.push(str[i])
     } else {
       //当前是右括号 --- stack.pop弹出已经入栈的左括号,map找到对应的右括号
-      if(str[i] !== map(stack.pop())) {
+      if (str[i] !== map[stack.pop()]) {
+        return false
+      }
+    }
+  }
+  // 循环入栈出栈结束后，栈为空时返回true,否则为false
+  return stack.length === 0
+}
+console.log(isValid('()')) // true
+console.log(isValid('()[]{}')) // true
+console.log(isValid('(]')) // false
+console.log(isValid('([)]')) // false
+console.log(isValid('{[]}')) // true
+
+function getTrue(str) {
+  const map = {
+    '[': ']',
+    '{': '}',
+    '(': ')',
+  }
+  const stack = []
+  for (let i = 0; i < str.length; i++) {
+    if (map[str[i]]) {
+      stack.push(str[i])
+    } else {
+      const s = stack.pop()
+      if (map[s] !== str[i]) {
         return false
       }
     }
   }
   return stack.length === 0
 }
-console.log(isValid("()"));  // true
-console.log(isValid("()[]{}"));  // true
-console.log(isValid("(]"));  // false
-console.log(isValid("([)]"));  // false
-console.log(isValid("{[]}"));  // true
