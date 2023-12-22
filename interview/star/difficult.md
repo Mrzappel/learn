@@ -1,4 +1,5 @@
 ### 登陆问题总结
+
 1. 单点登录
 - oa：链接拼接ticket参数，
 - 企微：先跳转到企业登录授权页，拿到code，再重定向到应用登录页，再区分来自哪个端，是pc还是h5，然后带参跳转到对应段的登录逻辑处理，调取登录接口，拿到登录信息，其他业务系统如营销系统，商用车系统，是不同的企业微信，所以回响的appid不同，区分后，跳转进行登录逻辑
@@ -12,3 +13,25 @@
 如company,end,activity,
 可统一到一个字段，如type='activity',
 pc登录失效则重定向到统一登陆页重新登录
+
+### 缓存配置策略
+html文件不启用强缓存，其他静态资源启用强缓存，过期之后使用协商缓存
+
+```nginx
+location / {
+    root   www; # 访问根目录
+    index  index.html index.htm; # 入口文件
+}
+
+location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
+    # 启用强缓存的静态资源， 强缓存过期之后使用协商缓存
+    expires 7d; # 设置缓存时间为7天
+     if_modified_since before;
+    add_header Cache-Control "max-age=604800, public"; # 设置强缓存
+}
+
+location ~* \.html$ {
+    # 不启用强缓存的 HTML 文件
+    expires off;
+}
+```
