@@ -50,3 +50,12 @@ const curry1 = (fn, ...args) => {
         }
     }
 }
+
+// 2023-12-25
+const myCurrying2 = (fn, ...args) => {
+  if (args.length >= fn.length) {
+    fn(...args)
+  } else {
+    return (...args2) => myCurrying2(fn, ...args, ...args2)
+  }
+}
