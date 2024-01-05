@@ -42,13 +42,13 @@ function curry(fn, ...args) {
 }
 
 const curry1 = (fn, ...args) => {
-    if (args.length >= fn.length) {
-        return fn(...args)
-    } else {
-        return (...args1) => {
-            curry1(fn,...args,...args1)
-        }
+  if (args.length >= fn.length) {
+    return fn(...args)
+  } else {
+    return (...args1) => {
+      curry1(fn, ...args, ...args1)
     }
+  }
 }
 
 // 2023-12-25
@@ -57,5 +57,13 @@ const myCurrying2 = (fn, ...args) => {
     fn(...args)
   } else {
     return (...args2) => myCurrying2(fn, ...args, ...args2)
+  }
+}
+
+const currying = (fn, ...args) => {
+  if (args.length >= fn.length) {
+    return fn(...args)
+  } else {
+    return (...args1) => currying(fn, ...args, ...args1)
   }
 }

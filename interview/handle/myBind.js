@@ -66,5 +66,23 @@ function bind () {
   
 }
 
+function bind(fn, context, ...args) {
+  return function (...innerArgs) {
+    // 处理构造函数调用
+    if (new.target) {
+      const bound = function (...newArgs) {
+        return fn.apply(
+          this instanceof bound ? this : context,
+          args.concat(newArgs)
+        )
+      }
+      bound.prototype = Object.create(fn.prototype)
+      return new bound(...innerArgs)
+    }
+
+    // 普通函数调用
+    return fn.apply(context, args.concat(innerArgs))
+  }
+}
 
 //
