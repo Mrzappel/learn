@@ -47,3 +47,83 @@ var compareVersion = function(version1, version2) {
         }
     }
 };
+
+// 实现一个完整的eventEmitter 
+
+// 1. 写一个isEqual函数用来判断两个参数是否相等
+var a = [1];   
+var b = [1];
+console.log(isEqual(a,b)) // true
+
+var a = [1];   // a和b可能是对象，可能是数组，可能是其他
+var b = "ccc";
+console.log(isEqual(a,b)) // false
+
+function isEqual(arg1, arg2) {
+  // 这里开始写代码
+  const getType = (val) => Object.prototype.toString.call(val)
+  if(getType(arg1 )!== getType(arg2)) {
+    return false
+  }
+  if(a === b) {
+    return true
+  }
+  const keysA = Object.keys(a)
+  const keysB = Object.keys(b)
+
+  if(keysA.length !== keysB.length) {
+    return false
+  }
+  for(let key of keysA) {
+    if(!keysB.includes(key) || !isEqual(a[key], b[key])) {
+      return false
+    }
+  }
+
+  return true
+}
+
+
+
+// 自己实现一个事件总线EventBus
+// 支持绑定事件 on；
+// 解绑事件 off；
+// 一次执行事件once；
+// 触发事件emit，并在触发事件时支持参数传递
+
+class EventBus {
+  // 请补充对应的代码实现 
+  constructor() {
+    this.events={}
+  }
+  on(event, callback) {
+    // 这里开始写代码
+    if(!this.events[event]) {
+      this.events[event] = []
+    }
+
+    this.events[event].push(callback)
+  }
+  off(event, callback) {
+    // 这里开始写代码
+    if(this.events[event]) {
+      this.events[event] = this.events[event].filter( cb => cb !== callback)
+    }
+  }
+  emit(event, data) {
+    // 这里开始写代码
+    if(this.events[event]) {
+      this.events[event].forEach( callback => callback(data))
+    }
+
+  }
+  once(event, callback) {
+    // 这里开始写代码
+    const onceCallback = (...args) =>  {
+      callback(...args)
+      this.off(event, onceCallback)
+    }
+    
+    this.on(event, onceCallback)
+  }
+}

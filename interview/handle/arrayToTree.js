@@ -45,3 +45,26 @@ const arrayToTree = (
 
 console.log(arrayToTree(array))
 export { arrayToTree }
+
+class CancelablePromise {
+  constructor(executor) {
+    let cancelHandler
+    this.promise = new Promise((resolve, reject) => {
+      cancelHandler = () => reject(new Error('Promise has been cancelled'))
+      return executor(resolve, reject)
+    })
+    this.cancel = cancelHandler
+  }
+}
+
+// 使用示例
+let cancelablePromise = new CancelablePromise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('Promise resolved')
+  }, 1000)
+})
+
+cancelablePromise.promise.then(console.log).catch(console.error)
+
+// 取消promise
+cancelablePromise.cancel()

@@ -191,3 +191,144 @@ axios.get('/some/api', {
 // 在需要取消请求的时候
 source.cancel('Operation canceled by the user.');
 ```
+
+/*
+  1. 使用 React 封装一个useFetch hooks
+  使用方式如 const {loading, data, error} = useFetch(url, options);
+*/
+import { useState, useEffect } from 'react'
+const useFetch = (url, options) => {
+  const [data, setData] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  useEffect(()=>{
+    const fetchData = async () => {
+      try {
+        const reponse = await fetch(url, options)
+        if(!response.ok) {
+          throw new Error ('request failed!')
+        }
+        const json = await reponse.json()
+        setData(json)
+      } catch (err) {
+        setError(err)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchData()
+  },[url, options])
+
+  return {loading, data, error}
+}
+
+export default useFetch
+
+
+
+
+/*
+ 2. 实现 compare 方法，比较两个版本号的大小，版本号规则 a.b.c.d，abcd 均为大于等于 0 的整数
+- 如果 version1 > version2 返回1
+- 如果version1 < version2，返回 -1
+- 相等返回 0
+*/
+
+const compare = (v1, v2) => {
+  const arr1 = v1.split('.')
+  const arr2 = v2.split('.')
+
+  for(let i = 0; i< Math.max(arr1.length, arr2.length); i++) {
+    const num1 = parseInt(arr1[i] || 0) 
+    const num2 = parseInt(arr2[i] || 0)
+
+    if(num1 < num2) {
+      return -1
+    } else if(num1 > num2) {
+      return 1
+    }
+  }
+
+  return 0
+}
+
+
+
+
+
+/*
+3. 实现 find 查询函数
+- 写一个 find 方法，根据 id 查找 data 树中的任意一项，例如：
+- find(data, 'Z101') // => '浦东'
+- find(data, '201C') // => '西湖区'
+*/
+
+var data = [
+  {
+    id: '100X', 
+    name: '上海', 
+    children: [
+      {
+        id: 'Z101',
+        name: '浦东',
+        children: []
+      },
+      {
+        id: '102Y',
+        name: '浦西',
+        children: []
+      }
+    ]
+  },
+  {
+    id: 'D200',
+    name: '杭州',
+    children: [
+      {
+        id: '201C',
+        name: '西湖区',
+        children: [{
+          id: 'A221',
+          name: '黄龙时代',
+          children: []
+        }]
+      },
+      {
+        id: 'V202',
+        name: '余杭区',
+        children: []
+      }
+    ]
+  }
+];
+
+
+const find = (data, id) => {
+  
+  if(data.id === id) {
+    return data.name
+  }
+
+  if(data.children && data.children.length) {
+    for(let i = 0; i<data.children.length; i++) {
+      const findItem = find(data.children[i], id)
+      if(findItem) {
+        return findItem
+      }
+    }
+  }
+
+  return
+}
+
+
+
+
+
+
+
+
+
+
